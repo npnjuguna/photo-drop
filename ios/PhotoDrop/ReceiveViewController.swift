@@ -95,18 +95,18 @@ class ReceiveViewController: UIViewController, UICollectionViewDataSource, UICol
         var error: NSError?
         listener = CBLListener(manager: CBLManager.sharedInstance(), port: 0)
 
-        listener.requiresAuth = true
-        let username = secureGenerateKey(NSCharacterSet.URLUserAllowedCharacterSet())
-        let password = secureGenerateKey(NSCharacterSet.URLPasswordAllowedCharacterSet())
-        listener.setPasswords([username : password])
+        listener.requiresAuth = false
+//        let username = secureGenerateKey(NSCharacterSet.URLUserAllowedCharacterSet())
+//        let password = secureGenerateKey(NSCharacterSet.URLPasswordAllowedCharacterSet())
+//        listener.setPasswords([username : password])
 
         var success = listener.start(&error)
         if success {
             // Set a sync url with the generated username and password:
             if let url = NSURL(string: database.name, relativeToURL: listener.URL) {
                 if let urlComp = NSURLComponents(string: url.absoluteString!) {
-                    urlComp.user = username
-                    urlComp.password = password
+//                    urlComp.user = username
+//                    urlComp.password = password
 
                     urlComp.host = getIFAddresses()[0]
 
